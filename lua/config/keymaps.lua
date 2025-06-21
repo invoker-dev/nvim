@@ -1,3 +1,4 @@
+
 local map = vim.keymap.set
 -- Mini.files <leader>e
 map('n', '<leader>e', function()
@@ -33,29 +34,40 @@ map("i", "<A-k>", "<esc><cmd>m .-2<cr>==gi", { desc = "Move Up" })
 map("v", "<A-j>", ":<C-u>execute \"'<,'>move '>+\" . v:count1<cr>gv=gv", { desc = "Move Down" })
 map("v", "<A-k>", ":<C-u>execute \"'<,'>move '<-\" . (v:count1 + 1)<cr>gv=gv", { desc = "Move Up" })
 
+
+
 -- picker 
-local pick = require("mini.pick").builtin
-local extra = require("mini.extra").pickers
-map("n", "<leader>sf", pick.files,        { desc = "pick files" })
-map("n", "<leader>sg", pick.grep_live,    { desc = "live grep" })
-map("n", "<leader>sb", pick.buffers,      { desc = "buffers" })
-map("n", "<leader>sh", pick.help,         { desc = "help tags" })
-map("n", "<leader>sc", extra.commands,    { desc = "commands" })
-map("n", "<leader>sd", extra.diagnostic,  { desc = "diagnostics" })
-map("n", "<leader>st", extra.treesitter,  { desc = "treesitter" })
--- git pickers
-map("n", "<leader>sib", extra.git_branches,  { desc = "branches" })
-map("n", "<leader>sic", extra.git_commits,   { desc = "commits" })
-map("n", "<leader>sif", extra.git_files,     { desc = "files" })
-map("n", "<leader>sih", extra.git_hunks,     { desc = "hunks" })
--- LSP
-local function map_lsp(lhs, scope, desc)
-  map("n", lhs, function() extra.lsp({ scope = scope }) end, { desc = "LSP: " .. desc })
-end
-map_lsp("<leader>sld",  "definition",       "definition")
-map_lsp("<leader>sli",  "implementation",   "implementation")
-map_lsp("<leader>slr",  "references",       "references")
-map_lsp("<leader>slsd", "document_symbol",  "document symbols")
-map_lsp("<leader>slsw", "workspace_symbol", "workspace symbols")
-map_lsp("<leader>slD",  "declaration",      "declaration")
-map_lsp("<leader>slt", "type_definition", "type definition")
+
+local fzf = require("fzf-lua")
+local map = vim.keymap.set
+
+-- Standard pickers
+map("n", "<leader>sf", fzf.files,         { desc = "Files" })
+map("n", "<leader>sg", fzf.live_grep,     { desc = "Live Grep" })
+map("n", "<leader>sb", fzf.buffers,       { desc = "Buffers" })
+map("n", "<leader>sh", fzf.help_tags,     { desc = "Help Tags" })
+map("n", "<leader>sm", fzf.man_pages,     { desc = "Man Pages" })
+map("n", "<leader>sc", fzf.commands,      { desc = "Commands" })
+map("n", "<leader>st", "<cmd>InspectTree<cr>", { desc = "Treesitter Inspect" }) -- this remains as is
+
+-- Git pickers
+map("n", "<leader>sib", fzf.git_branches, { desc = "Git Branches" })
+map("n", "<leader>sic", fzf.git_commits,  { desc = "Git Commits" })
+map("n", "<leader>sif", fzf.git_files,    { desc = "Git Files" })
+map("n", "<leader>sih", fzf.git_status,   { desc = "Git Hunks/Status" }) -- fzf-lua doesn't have a direct 'hunks', but status shows changes
+
+-- LSP pickers
+map("n", "<leader>sld", fzf.lsp_definitions,        { desc = "Definitions"})
+map("n", "<leader>sli", fzf.lsp_implementations,    { desc = "Implementations"})
+map("n", "<leader>slr", fzf.lsp_references,         { desc = "References"})
+map("n", "<leader>slsd", fzf.lsp_document_symbols,  { desc = "Document Symbols"})
+map("n", "<leader>slsw", fzf.lsp_live_workspace_symbols, { desc = "Workspace Symbols"})
+map("n", "<leader>slD", fzf.lsp_declarations,       { desc = "Declarations"})
+map("n", "<leader>slt", fzf.lsp_typedefs,           { desc = "Type Definitions"})
+map("n", "<leader>slci", fzf.lsp_incoming_calls,       { desc = "Incoming Calls"})
+map("n", "<leader>slco", fzf.lsp_outgoing_calls,       { desc = "Outgoing Calls"})
+map("n", "<leader>sla", fzf.lsp_code_actions,      { desc = "Code Actions"})
+map("n", "<leader>slid", fzf.diagnostics_document,{ desc = "Document Diagnostics"})
+map("n", "<leader>sliw", fzf.diagnostics_workspace,{ desc = "Workspace Diagnostics"})
+
+

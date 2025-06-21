@@ -1,19 +1,18 @@
-return {
-    'echasnovski/mini.nvim',
+return { 'echasnovski/mini.nvim',
+
     event = "VeryLazy",
     config = function()
-
       require('mini.icons').setup()
       require('mini.ai').setup()
       require('mini.surround').setup()
       require('mini.align').setup()
       require('mini.git').setup()
-      require('mini.pick').setup()
       require('mini.notify').setup()
       require('mini.extra').setup()
 
       local miniclue = require('mini.clue')
       miniclue.setup({
+        window = { width = "auto"},
         triggers = {
           -- Leader triggers
           { mode = 'n', keys = '<Leader>' },
@@ -56,6 +55,7 @@ return {
           miniclue.gen_clues.z(),
           { mode = 'n', keys = '<Leader>s', desc = 'search' },
           { mode = 'n', keys = '<Leader>sls', desc = 'symbols' },
+          { mode = 'n', keys = '<Leader>slc', desc = 'calls' },
           { mode = 'n', keys = '<Leader>sl', desc = 'LSP' },
           { mode = 'n', keys = '<Leader>si', desc = 'git' },
         },
@@ -68,6 +68,7 @@ return {
       end
 
       require('mini.files').setup {
+
         windows = {
           max_number = 1,
           preview = false,

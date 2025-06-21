@@ -1,3 +1,4 @@
+
 -- set leader to <space> and @@
 vim.g.mapleader      = " "
 vim.g.localmapleader = "\\"
@@ -11,7 +12,7 @@ opt.undolevels    = 10000
 opt.updatetime    = 200
 opt.clipboard     = vim.env.SSH_TTY and "" or "unnamedplus"
 opt.completeopt   = "menu,menuone,noselect,fuzzy"
-opt.conceallevel  = 2 -- hide markup syntax
+opt.conceallevel  = 2
 opt.confirm       = true
 opt.cursorline    = true
 opt.foldlevel     = 99
