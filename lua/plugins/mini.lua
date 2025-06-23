@@ -12,7 +12,7 @@ return { 'echasnovski/mini.nvim',
 
       local miniclue = require('mini.clue')
       miniclue.setup({
-        window = { width = "auto"},
+        window = { width = "auto", delay = 0},
         triggers = {
           -- Leader triggers
           { mode = 'n', keys = '<Leader>' },
