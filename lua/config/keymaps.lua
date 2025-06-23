@@ -39,7 +39,6 @@ map("v", "<A-k>", ":<C-u>execute \"'<,'>move '<-\" . (v:count1 + 1)<cr>gv=gv", {
 -- picker 
 
 local fzf = require("fzf-lua")
-local map = vim.keymap.set
 
 -- Standard pickers
 map("n", "<leader>sf", fzf.files,               { desc = "files" })
@@ -48,10 +47,12 @@ map("n", "<leader>b", fzf.builtin,              { desc = "builtin" })
 map("n", "<leader><leader>", fzf.buffers,       { desc = "buffers" })
 map("n", "<leader>/", fzf.lgrep_curbuf,         { desc = "current buffer" })
 map("n", "<leader>sh", fzf.help_tags,           { desc = "help tags" })
-map("n", "<leader>sm", fzf.man_pages,           { desc = "man pages" })
+map("n", "<leader>sm", function()
+  fzf.man_pages({ sections = { "3" }, prompt_title = "Man Section 3" })
+end, { desc = "man section 3" })
 map("n", "<leader>sc", fzf.commands,            { desc = "commands" })
 map("n", "<leader>so", fzf.oldfiles,            { desc = "old files" })
-map("n", "<leader>st", "<cmd>InspectTree<cr>",  { desc = "treesitter inspect" }) -- this remains as is
+map("n", "<leader>st", "<cmd>InspectTree<cr>",  { desc = "treesitter inspect" })
 
 -- Git pickers
 map("n", "<leader>sib", fzf.git_branches, { desc = "git branches" })
@@ -60,17 +61,20 @@ map("n", "<leader>sif", fzf.git_files,    { desc = "git files" })
 map("n", "<leader>sih", fzf.git_status,   { desc = "git hunks/status" }) -- fzf-lua doesn't have a direct 'hunks', but status shows changes
 
 -- LSP pickers
-map("n", "<leader>sld", fzf.lsp_definitions,        { desc = "definitions"})
-map("n", "<leader>sli", fzf.lsp_implementations,    { desc = "implementations"})
-map("n", "<leader>slr", fzf.lsp_references,         { desc = "references"})
-map("n", "<leader>slsd", fzf.lsp_document_symbols,  { desc = "document symbols"})
-map("n", "<leader>slsw", fzf.lsp_live_workspace_symbols, { desc = "workspace symbols"})
-map("n", "<leader>slD", fzf.lsp_declarations,       { desc = "declarations"})
-map("n", "<leader>slt", fzf.lsp_typedefs,           { desc = "type definitions"})
-map("n", "<leader>slci", fzf.lsp_incoming_calls,       { desc = "incoming calls"})
-map("n", "<leader>slco", fzf.lsp_outgoing_calls,       { desc = "outgoing calls"})
-map("n", "<leader>sla", fzf.lsp_code_actions,      { desc = "code actions"})
-map("n", "<leader>slid", fzf.diagnostics_document,{ desc = "document diagnostics"})
-map("n", "<leader>sliw", fzf.diagnostics_workspace,{ desc = "workspace diagnostics"})
+map("n", "<leader>ld", fzf.lsp_definitions,        { desc = "definitions"})
+map("n", "<leader>li", fzf.lsp_implementations,    { desc = "implementations"})
+map("n", "<leader>lr", fzf.lsp_references,         { desc = "references"})
+map("n", "<leader>lsd", fzf.lsp_document_symbols,  { desc = "document symbols"})
+map("n", "<leader>lsw", fzf.lsp_live_workspace_symbols, { desc = "workspace symbols"})
+map("n", "<leader>lD", fzf.lsp_declarations,       { desc = "declarations"})
+map("n", "<leader>lt", fzf.lsp_typedefs,           { desc = "type definitions"})
+map("n", "<leader>lci", fzf.lsp_incoming_calls,       { desc = "incoming calls"})
+map("n", "<leader>lco", fzf.lsp_outgoing_calls,       { desc = "outgoing calls"})
+map("n", "<leader>la", fzf.lsp_code_actions,      { desc = "code actions"})
+map("n", "<leader>lid", fzf.diagnostics_document,{ desc = "document diagnostics"})
+map("n", "<leader>liw", fzf.diagnostics_workspace,{ desc = "workspace diagnostics"})
 
+vim.keymap.set("n", "<leader>f", function()
+  vim.lsp.buf.format()
+end, { desc = "Format buffer" })
 
