@@ -26,7 +26,7 @@ map("v", "<A-k>", ":<C-u>execute \"'<,'>move '<-\" . (v:count1 + 1)<cr>gv=gv", {
 
 -- mini  files
 local minifiles_toggle = function(...)
-  if not MiniFiles.close() then MiniFiles.open(...) end
+  if not MiniFiles.close() then MiniFiles.open(vim.api.nvim_buf_get_name(0)) end
 end
 
 map('n', '<leader>e', minifiles_toggle, { desc = 'files' })

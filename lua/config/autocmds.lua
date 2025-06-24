@@ -13,7 +13,7 @@ vim.api.nvim_create_autocmd("TextYankPost",{
 -- mini files
 vim.api.nvim_create_autocmd({ "VimEnter" }, {
   callback = function()
-    require("mini.files").open(nil, true)
+    require("mini.files").open(vim.api.nvim_buf_get_name(0))
   end,
 })
 
