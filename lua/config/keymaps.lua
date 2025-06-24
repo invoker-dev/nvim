@@ -1,15 +1,5 @@
 
 local map = vim.keymap.set
--- Mini.files <leader>e
-map('n', '<leader>e', function()
-  local buffer_name = vim.api.nvim_buf_get_name(0)
-  if buffer_name == '' or string.match(buffer_name, 'Starter') then
-    require('mini.files').open(vim.loop.cwd())
-  else
-    require('mini.files').open(vim.api.nvim_buf_get_name(0))
-  end
-end, { desc = 'files' })
-
 -- Move to window using the <ctrl> hjkl keys
 map("n", "<C-h>", "<C-w>h", { desc = "left window", remap = true })
 map("n", "<C-j>", "<C-w>j", { desc = "lower window", remap = true })
@@ -33,6 +23,13 @@ map("i", "<A-j>", "<esc><cmd>m .+1<cr>==gi", { desc = "move down" })
 map("i", "<A-k>", "<esc><cmd>m .-2<cr>==gi", { desc = "move up" })
 map("v", "<A-j>", ":<C-u>execute \"'<,'>move '>+\" . v:count1<cr>gv=gv", { desc = "move down" })
 map("v", "<A-k>", ":<C-u>execute \"'<,'>move '<-\" . (v:count1 + 1)<cr>gv=gv", { desc = "move up" })
+
+-- mini  files
+local minifiles_toggle = function(...)
+  if not MiniFiles.close() then MiniFiles.open(...) end
+end
+
+map('n', '<leader>e', minifiles_toggle, { desc = 'files' })
 
 
 
