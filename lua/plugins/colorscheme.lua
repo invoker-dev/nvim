@@ -22,8 +22,8 @@ return {
         inverse = true, -- invert background for search, diffs, statuslines and errors
         contrast = '', -- can be "hard", "soft" or empty string
         palette_overrides = {
-          dark0 = '#1b1b1b',
-          dark1 = '#202021',
+          -- dark0 = '#1b1b1b',
+          -- dark1 = '#202021',
         },
         overrides = {},
         dim_inactive = false,

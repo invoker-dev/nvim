@@ -10,10 +10,12 @@ vim.api.nvim_create_autocmd("TextYankPost",{
   })
 
 
--- mini files
-vim.api.nvim_create_autocmd({ "VimEnter" }, {
+
+vim.api.nvim_create_autocmd("VimEnter", {
   callback = function()
-    require("mini.files").open(vim.api.nvim_buf_get_name(0))
+    if vim.fn.argc() == 1 and vim.fn.isdirectory(vim.fn.argv(0)) == 1 then
+      require("mini.files").open(vim.fn.argv(0))
+    end
   end,
 })
 
@@ -30,14 +32,6 @@ vim.api.nvim_create_autocmd('User', {
     end,
   })
 
-  -- vim.api.nvim_create_autocmd("WinEnter", {
-  --   group = vim.api.nvim_create_augroup("MinifilesFocusSplit", {clear = true}),
-  --   callback = function()
-  --     local new_target = vim.api.nvim_get_current_win()
-  --     MiniFiles.set_target_window(new_target)
-  --   end,
-  -- })
-  --
   local map_split = function(buf_id, lhs, direction)
     local rhs = function()
       -- Make new window and set it as target
@@ -54,7 +48,6 @@ vim.api.nvim_create_autocmd('User', {
       -- add appropriate `MiniFiles.go_in()` call instead of this comment.
     end
 
-    -- Adding `desc` will result into `show_help` entries
     local desc = 'Split ' .. direction
     vim.keymap.set('n', lhs, rhs, { buffer = buf_id, desc = desc })
   end
@@ -63,7 +56,6 @@ vim.api.nvim_create_autocmd('User', {
     pattern = 'MiniFilesBufferCreate',
     callback = function(args)
       local buf_id = args.data.buf_id
-      -- Tweak keys to your liking
       map_split(buf_id, '<C-s>', 'belowright horizontal')
       map_split(buf_id, '<C-v>', 'belowright vertical')
       map_split(buf_id, '<C-t>', 'tab')

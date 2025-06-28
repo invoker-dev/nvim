@@ -1,10 +1,10 @@
+local g = vim.g
 
--- set leader to <space> and @@
-vim.g.mapleader      = " "
-vim.g.localmapleader = "\\"
+g.mapleader      = " "
+g.localmapleader = "\\"
 
-vim.g.loaded_netrw       = 1
-vim.g.loaded_netrwPlugin = 1
+g.loaded_netrw       = 1
+g.loaded_netrwPlugin = 1
 
 -- NEOVIM OPTIONS
 local opt = vim.opt
