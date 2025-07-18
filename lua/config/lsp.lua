@@ -1,8 +1,8 @@
-
 vim.lsp.enable({
     "clangd",
     "lua_ls",
-    "cmake_language_server",
+    "cmake-language-server",
+    "glsl_analyzer",
 })
 
 vim.diagnostic.config({

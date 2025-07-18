@@ -9,7 +9,12 @@ vim.api.nvim_create_autocmd("TextYankPost",{
     desc = "Highlight yank",
   })
 
-
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "markdown",
+  callback = function()
+    vim.wo.wrap = true
+  end,
+})
 
 vim.api.nvim_create_autocmd("VimEnter", {
   callback = function()
