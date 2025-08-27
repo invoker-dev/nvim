@@ -1,7 +1,7 @@
 local g              = vim.g
 
-g.mapleader          = " "
-g.localmapleader     = "\\"
+-- g.mapleader          = " "
+-- g.localmapleader     = "\\"
 
 g.loaded_netrw       = 1
 g.loaded_netrwPlugin = 1
@@ -22,7 +22,7 @@ opt.conceallevel     = 1
 opt.confirm          = true
 opt.cursorline       = true
 opt.textwidth        = 80
-opt.colorcolumn      = "80"
+opt.colorcolumn      = "0"
 opt.foldlevel        = 99
 opt.ignorecase       = true
 opt.inccommand       = "nosplit"

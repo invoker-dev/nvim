@@ -1,20 +1,19 @@
 return {
-  'echasnovski/mini.nvim',
+  'echasnovski/mini.clue',
+  version = false,
   config = function()
-    require('mini.icons').setup()
-    require('mini.ai').setup()
-    require('mini.surround').setup()
-    require('mini.align').setup()
-    require('mini.git').setup()
-    require('mini.diff').setup()
-    require('mini.notify').setup()
-    require('mini.extra').setup()
-    require('mini.operators').setup()
-    require('mini.statusline').setup()
-
     local miniclue = require('mini.clue')
     miniclue.setup({
-      window = { width = "auto", delay = 0 },
+
+      window = {
+        config = {
+          width = 'auto',
+          border = 'single',
+
+        },
+        delay = 500,
+      },
+
       triggers = {
         -- Leader triggers
         { mode = 'n', keys = '<Leader>' },
@@ -55,30 +54,7 @@ return {
         miniclue.gen_clues.registers(),
         miniclue.gen_clues.windows(),
         miniclue.gen_clues.z(),
-        { mode = 'n', keys = '<Leader>s',   desc = 'search' },
-        { mode = 'n', keys = '<Leader>sls', desc = 'symbols' },
-        { mode = 'n', keys = '<Leader>slc', desc = 'calls' },
-        { mode = 'n', keys = '<Leader>sl',  desc = 'LSP' },
-        { mode = 'n', keys = '<Leader>si',  desc = 'git' },
       },
     })
-    require('mini.files').setup {
-
-      windows = {
-        max_number = 1,
-        preview = false,
-        width_focus = 40,
-        width_nofocus = 10,
-      },
-      content = {
-        filter = nil,
-        sort = nil,
-        view = nil,
-      },
-      mappings = {
-        --
-      },
-    }
-  end,
-
+  end
 }
