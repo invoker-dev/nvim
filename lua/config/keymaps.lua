@@ -113,3 +113,13 @@ map('n', '<leader>gc', fzf.git_commits, { desc = "git files", noremap = true, si
 -- Diagnostics navigation
 -- map('n', '[d', vim.diagnostic.goto_prev, { desc = "LSP: Previous diagnostic" })
 -- map('n', ']d', vim.diagnostic.goto_next, { desc = "LSP: Next diagnostic" })
+
+--
+-- COMPILE C files
+
+vim.keymap.set("n", "<leader>c", function()
+  vim.cmd("w")
+  vim.cmd("botright split")
+  vim.cmd("resize 12")
+  vim.cmd("terminal " .. "make")
+end)

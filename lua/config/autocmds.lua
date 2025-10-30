@@ -15,3 +15,9 @@ vim.api.nvim_create_autocmd("FileType", {
   end,
 })
 
+-- treat .h as c files
+vim.api.nvim_create_autocmd({"BufRead", "BufNewFile"}, {
+    pattern = "*.h",
+    command = "set filetype=c",
+})
+
